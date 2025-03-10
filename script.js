@@ -4,11 +4,21 @@ function showCategory(folder) {
 
 function fetchMediaFiles(folder) {
     const container = document.getElementById('content');
-    container.innerHTML = '';
+    container.innerHTML = ''; // Очищаем предыдущий контент
 
-    fetch(`fetch_media.php?folder=${folder}`)
-        .then(response => response.json())
+    fetch(`fetchMedia.php?folder=${folder}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(files => {
+            if (files.error) {
+                container.innerHTML = `<p>${files.error}</p>`;
+                return;
+            }
+
             files.forEach(fileName => {
                 if (folder === 'images') {
                     const img = document.createElement('img');
@@ -19,10 +29,11 @@ function fetchMediaFiles(folder) {
                     };
                     container.appendChild(img);
                 } else if (folder === 'videos') {
-                    const videoElement = document.createElement('video'); // создаем элемент видео
+                    const videoElement = document.createElement('video');
                     videoElement.src = `videos/${fileName}`;
                     videoElement.alt = 'Видео';
-                    videoElement.onclick = function() { // обрабатываем клик по видео
+                    videoElement.controls = true; // Добавление управляющих элементов
+                    videoElement.onclick = function() {
                         openModal(videoElement.src, true);
                     };
                     container.appendChild(videoElement);
@@ -43,12 +54,12 @@ function openModal(src, isVideo = false) {
     if (isVideo) {
         modalVideo.src = src;
         modalVideo.style.display = "block"; // Показывать видео
-        modalImage.style.display = "none"; // Скрыть изображение
+        modalImage.style.display = "none";  // Скрыть изображение
         modalVideo.play(); // Начать воспроизведение видео
     } else {
         modalImage.src = src;
         modalImage.style.display = "block"; // Показывать изображение
-        modalVideo.style.display = "none"; // Скрыть видео
+        modalVideo.style.display = "none";   // Скрыть видео
     }
 }
 
@@ -59,6 +70,10 @@ function closeModal() {
     modal.style.display = "none";
     modalVideo.pause(); // Остановить видео
     modalVideo.src = ''; // Очистить источник видео
+
+    // Также очищаем изображение
+    const modalImage = document.getElementById('modal-image');
+    modalImage.src = ''; // Очистить источник изображения
 }
 
 // Закрытие модального окна при клике вне его области
