@@ -29,13 +29,14 @@
     </main>
     
     <!-- Модальное окно для изображений -->
-    <div id="modal" class="modal" onclick="closeModal()">
-        <span class="close" onclick="closeModal()">&times;</span>
+    <div id="modal" class="modal" onclick="closeModal(event)">
+        <span class="close" onclick="closeModal(event)">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
     
     <!-- Модальное окно для видео -->
-    <div id="videoModal" class="video-modal" onclick="closeVideoModal()">
+    <div id="videoModal" class="video-modal" onclick="closeVideoModal(event)">
+	<span class="close" onclick="closeVideoModal(event)">&times;</span>
         <video id="modalVideo" class="modal-video" controls>
             <source id="modalVideoSource" src="" type="video/mp4">
             Ваш браузер не поддерживает видео.

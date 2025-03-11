@@ -57,9 +57,12 @@ function openModal(img) {
     modalImg.src = img.src;
 }
 
-function closeModal() {
+function closeModal(event) {
     const modal = document.getElementById("modal");
     modal.style.display = "none";
+	if (event.target === document.getElementById('modal') || event.target === document.querySelector('.close')) {
+        document.getElementById('modal').style.display = 'none';
+    }
 }
 
 function openVideoModal(videoPath) {
@@ -72,11 +75,10 @@ function openVideoModal(videoPath) {
     videoModal.style.display = "flex"; // Показать модальное окно
 }
 
-function closeVideoModal() {
+function closeVideoModal(event) {
     const videoModal = document.getElementById("videoModal");
     videoModal.style.display = "none";
+	if (event.target === document.getElementById('videoModal') || event.target === document.querySelector('.close')) {
+        document.getElementById('videoModal').style.display = 'none';
+    }
 }
-// Вызов функции для загрузки категории при загрузке страницы
-document.addEventListener("DOMContentLoaded", function() {
-    loadCategory('images/category1');
-});
