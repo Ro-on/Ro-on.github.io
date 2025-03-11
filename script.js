@@ -76,7 +76,6 @@ function closeVideoModal() {
     const videoModal = document.getElementById("videoModal");
     videoModal.style.display = "none";
 }
-
 // Вызов функции для загрузки категории при загрузке страницы
 document.addEventListener("DOMContentLoaded", function() {
     loadCategory('images/category1');
