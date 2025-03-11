@@ -1,5 +1,50 @@
 const GITHUB_API_URL = "https://api.github.com/repos/Ro-on/ro-on.github.io/contents/";
 
+async function loadCategory(category) {
+    const response = await fetch(GITHUB_API_URL + category);
+    const data = await response.json();
+
+    const gallery = document.getElementById("gallery");
+    gallery.innerHTML = ''; // Очистить текущий контент
+
+    data.forEach(item => {
+        const filePath = item.download_url;
+
+        // Проверка на изображения
+        if (item.type === 'file' && !item.name.endsWith('.mp4')) {
+            const box = document.createElement("div");
+            box.className = "gallery-box";
+            box.onclick = () => openModal({ src: filePath });
+
+            const img = document.createElement("img");
+            img.src = filePath;
+            img.alt = "Изображение";
+            img.className = "gallery-image";
+
+            box.appendChild(img);
+            gallery.appendChild(box);
+        }
+
+        // Проверка на видео
+        if (item.name.endsWith('.mp4')) {
+            const videoBox = document.createElement("div");
+            videoBox.className = "gallery-box";
+            videoBox.onclick = () => openVideoModal(filePath); // Открываем модальное окно для видео
+
+            const videoElement = document.createElement("video");
+            videoElement.src = filePath;
+            videoElement.alt = "Видео";
+            videoElement.className = "gallery-video"; // класс для стилизации видео
+            videoElement.controls = true; // Добавляем элементы управления видео (плей, пауза и т.д.)
+            videoElement.muted = true; // Если необходимо, не забудьте отключить звук (можно включить в модальном окне)
+
+            videoBox.appendChild(videoElement);
+            gallery.appendChild(videoBox);
+        }
+    });
+}
+
+
 function openModal(img) {
     const modal = document.getElementById("modal");
     const modalImg = document.getElementById("modalImage");
@@ -12,59 +57,18 @@ function closeModal() {
     modal.style.display = "none";
 }
 
-function openVideoModal(video) {
-    const videoModal = document.getElementById("videoModal");
-    const modalVideo = document.getElementById("modalVideo");
-    const modalSource = document.getElementById("modalVideoSource");
-    videoModal.style.display = "flex";
-    modalSource.src = video.src;
-    modalVideo.load();
-}
+function openVideoModal(videoPath) {
+       console.log(videoPath); // Печатает URL видео в консоль
+       const videoModal = document.getElementById("videoModal");
+       const modalVideo = document.getElementById("modalVideo");
+       const modalSource = document.getElementById("modalVideoSource");
+      
+       modalSource.src = videoPath; 
+       modalVideo.load(); // Обновить источник видео
+       videoModal.style.display = "flex"; // Показать модальное окно
+   }
 
 function closeVideoModal() {
     const videoModal = document.getElementById("videoModal");
     videoModal.style.display = "none";
-    const modalVideo = document.getElementById("modalVideo");
-    modalVideo.src = ""; // Остановить видео
-}
-
-async function loadCategory(category) {
-    const response = await fetch(GITHUB_API_URL + category);
-    const data = await response.json();
-
-    const gallery = document.getElementById("gallery");
-    gallery.innerHTML = ''; // Очистить текущий контент
-
-    data.forEach(item => {
-        if (item.type === 'file') {
-            const filePath = item.download_url;
-
-            const img = document.createElement("img");
-            img.src = filePath;
-            img.alt = "Мем";
-            img.className = "gallery-image";
-            img.onclick = () => openModal(img);
-            gallery.appendChild(img);
-        }
-    });
-}
-
-async function loadVideos() {
-    const response = await fetch(GITHUB_API_URL + 'videos');
-    const data = await response.json();
-
-    const gallery = document.getElementById("gallery");
-    gallery.innerHTML = ''; // Очистить текущий контент
-
-    data.forEach(item => {
-        if (item.type === 'file') {
-            const filePath = item.download_url;
-
-            const video = document.createElement("video");
-            video.controls = true;
-            video.src = filePath;
-            video.onclick = () => openVideoModal(video);
-            gallery.appendChild(video);
-        }
-    });
 }

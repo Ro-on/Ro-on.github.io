@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Категория 1</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Категория 1</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="category2.html">Категория 2</a></li>
+                <li><a href="category3.html">Категория 3</a></li>
+                <li><a href="category4.html">Категория 4</a></li>
+                <li><a href="videos.html">Видео</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="content">
+        <section id="gallery" class="gallery"></section>
+    </main>
+	
+<div id="gallery"></div>
+
+<!-- Модальное окно для видео -->
+<div id="videoModal" class="video-modal">
+    <span class="close" onclick="closeVideoModal()">&times;</span>
+    <video class="modal-video" controls id="modalVideo">
+        <source id="modalVideoSource" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
+</div>
+
+    <script src="script.js"></script>
+	<script>
+    loadCategory('videos');
+</script>
+</body>
+</html>

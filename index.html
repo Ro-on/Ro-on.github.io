@@ -11,11 +11,11 @@
         <h1>Архив Мемов</h1>
         <nav>
             <ul>
-                <li><a href="#" onclick="loadCategory('images/category1')">Категория 1</a></li>
-                <li><a href="#" onclick="loadCategory('images/category2')">Категория 2</a></li>
-                <li><a href="#" onclick="loadCategory('images/category3')">Категория 3</a></li>
-                <li><a href="#" onclick="loadCategory('images/category4')">Категория 4</a></li>
-                <li><a href="#" onclick="loadVideos()">Видео</a></li>
+                <li><a href="category1.html">Категория 1</a></li>
+                <li><a href="category2.html">Категория 2</a></li>
+                <li><li><a href="category3.html">Категория 3</a></li>
+                <li><a href="category4.html">Категория 4</a></li>
+                <li><a href="videos.html">Видео</a></li>
             </ul>
         </nav>
     </header>
@@ -25,21 +25,22 @@
             <img src="welcome-logo.jpeg" alt="Добро пожаловать" class="center-image">
             <p>Добро пожаловать в наш архив мемов! Пролистайте ниже, чтобы исследовать наши категории.</p>
         </section>
-        <section id="gallery" class="gallery"></section>
     </main>
+	
+	<div id="gallery" class="gallery"></div>
 
-    <div id="modal" class="modal" onclick="closeModal()">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage">
-    </div>
+<!-- Модальное окно для изображений -->
+<div id="modal" class="modal" onclick="closeModal()">
+    <img id="modalImage" class="modal-image" />
+</div>
 
-    <div id="videoModal" class="modal" onclick="closeVideoModal()">
-        <span class="close" onclick="closeVideoModal()">&times;</span>
-        <video class="modal-video" controls id="modalVideo">
-            <source id="modalVideoSource" type="video/mp4">
-        </video>
-    </div>
+<!-- Модальное окно для видео -->
+<div id="videoModal" class="video-modal" onclick="closeVideoModal()">
+    <video id="modalVideo" class="modal-video" controls>
+        <source id="modalVideoSource" src="" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
+</div>
 
-    <script src="script.js"></script>
 </body>
 </html>
