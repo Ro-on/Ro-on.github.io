@@ -60,7 +60,7 @@ function openModal(img) {
 function closeModal(event) {
     const modal = document.getElementById("modal");
     modal.style.display = "none";
-	if (event.target === document.getElementById('modal') || event.target === document.querySelector('.close')) {
+	if (event.target === document.getElementById('modal')) {
         document.getElementById('modal').style.display = 'none';
     }
 }
@@ -78,7 +78,7 @@ function openVideoModal(videoPath) {
 function closeVideoModal(event) {
     const videoModal = document.getElementById("videoModal");
     videoModal.style.display = "none";
-	if (event.target === document.getElementById('videoModal') || event.target === document.querySelector('.close')) {
+	if (event.target === document.getElementById('videoModal')) {
         document.getElementById('videoModal').style.display = 'none';
     }
 }
