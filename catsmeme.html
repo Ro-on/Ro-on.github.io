@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Архив Мемов Горящего тестера</title>
+    <title>Мемы с котиками :3</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Архив Мемов Горящего тестера</h1>
+        <h1>Мемы с котиками :3</h1>
         <nav>
             <ul>
-                <li><a href="catsmeme.html">Мемы с котиками :3</a></li>
+                <li><a href="index.html">Главная</a></li>
                 <li><a href="gamememe.html">Игровые мемы</a></li>
                 <li><a href="lifememe.html">Жизненные мемы</a></li>
                 <li><a href="ITmeme.html">Мемы погромистов</a></li>
@@ -21,10 +21,6 @@
     </header>
 
     <main id="content">
-        <section id="welcome">
-            <img src="welcome-logo.jpeg" alt="Добро пожаловать" class="center-image">
-            <p>Добро пожаловать в наш архив мемов! Пролистайте ниже, чтобы исследовать наши категории.</p>
-        </section>
         <section id="gallery" class="gallery"></section>
     </main>
     
@@ -33,15 +29,12 @@
         <span class="close" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
-    
-    <!-- Модальное окно для видео -->
-    <div id="videoModal" class="video-modal" onclick="closeVideoModal()">
-        <video id="modalVideo" class="modal-video" controls>
-            <source id="modalVideoSource" src="" type="video/mp4">
-            Ваш браузер не поддерживает видео.
-        </video>
-    </div>
 
     <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadCategory('images/cats');
+        });
+    </script>
 </body>
 </html>

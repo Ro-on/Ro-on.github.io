@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Видео мемы</title>
+    <title>Жизненные мемы</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Видео мемы</h1>
+        <h1>Жизненные мемы</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Главная</a></li>
                 <li><a href="catsmeme.html">Мемы с котиками :3</a></li>
                 <li><a href="gamememe.html">Игровые мемы</a></li>
-                <li><a href="lifememe.html">Жизненные мемы</a></li>
                 <li><a href="ITmeme.html">Мемы погромистов</a></li>
+                <li><a href="videos.html">Видео мемы</a></li>
             </ul>
         </nav>
     </header>
@@ -23,21 +23,18 @@
     <main id="content">
         <section id="gallery" class="gallery"></section>
     </main>
+	
+	<div id="gallery"></div>
 
-    <!-- Модальное окно для видео -->
-    <div id="videoModal" class="video-modal">
-        <span class="close" onclick="closeVideoModal()">&times;</span>
-        <video class="modal-video" controls id="modalVideo">
-            <source id="modalVideoSource" type="video/mp4">
-            Ваш браузер не поддерживает видео.
-        </video>
-    </div>
+<!-- Модальное окно для изображений -->
+<div id="modal" class="modal" onclick="closeModal()">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
 
     <script src="script.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            loadCategory('videos');
-        });
-    </script>
+	<script>
+    loadCategory('images/life');
+</script>
 </body>
 </html>
