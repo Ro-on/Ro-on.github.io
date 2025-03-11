@@ -3,35 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мое Портфолио</title>
+    <title>Архив Мемов Горящего Тестера</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Добро пожаловать в мое портфолио</h1>
-        <nav>
-            <a href="#" onclick="showCategory('images')">Галерея изображений</a>
-            <a href="#" onclick="showCategory('videos')">Галерея видео</a>
-        </nav>
-    </header>
 
-    <main>
-        <div id="container" class="container">
-            <h2 id="category-title">Выберите категорию</h2>
-            <div id="content" class="content"></div>
+<header>
+    <h1>Архив Мемов Горящего Тестера</h1>
+    <nav>
+        <ul>
+            <li><a href="#category1">Мемы с котиками :3</a></li>
+            <li><a href="#category2">Жизненные мемы</a></li>
+            <li><a href="#category3">Мемы погромистов</a></li>
+            <li><a href="#category4">Игровые мемы</a></li>
+            <li><a href="#videos">Видео мемы</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section id="welcome">
+        <img src="welcome-image.jpg" alt="Добро пожаловать" class="center-image">
+        <p>Добро пожаловать в наш архив мемов! Пролистайте ниже, чтобы исследовать наши категории.</p>
+    </section>
+
+    <section id="categories">
+        <h2>Категории</h2>
+        <div class="category-links">
+            <a href="#category1">Категория 1</a>
+            <a href="#category2">Категория 2</a>
+            <a href="#category3">Категория 3</a>
+            <a href="#category4">Категория 4</a>
+            <a href="#videos">Видео</a>
         </div>
-    </main>
+    </section>
 
-    <div id="modal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img id="modal-image" class="modal-content" style="display:none;">
-        <video id="modal-video" class="modal-content" style="display:none;" controls></video>
-        <div id="caption"></div>
-    </div>
+    <section id="category1">
+        <h2>Категория 1</h2>
+        <div class="gallery">
+            <img src="image1.jpg" alt="Мем 1" class="gallery-image" onclick="openModal(this)">
+            <img src="image2.jpg" alt="Мем 2" class="gallery-image" onclick="openModal(this)">
+        </div>
+    </section>
 
-    <footer>
-        <p>© 2025 Мое портфолио. Я не являюсь автором ни одного видео и изображения.</p>
-    </footer>
+    <section id="category2">
+        <h2>Категория 2</h2>
+        <div class="gallery">
+            <img src="image3.jpg" alt="Мем 3" class="gallery-image" onclick="openModal(this)">
+            <img src="image4.jpg" alt="Мем 4" class="gallery-image" onclick="openModal(this)">
+        </div>
+    </section>
+
+    <section id="category3">
+        <h2>Категория 3</h2>
+        <div class="gallery">
+            <img src="image5.jpg" alt="Мем 5" class="gallery-image" onclick="openModal(this)">
+            <img src="image6.jpg" alt="Мем 6" class="gallery-image" onclick="openModal(this)">
+        </div>
+    </section>
+
+    <section id="category4">
+        <h2>Категория 4</h2>
+        <div class="gallery">
+            <img src="image7.jpg" alt="Мем 7" class="gallery-image" onclick="openModal(this)">
+            <img src="image8.jpg" alt="Мем 8" class="gallery-image" onclick="openModal(this)">
+        </div>
+    </section>
+
+    <section id="videos">
+        <h2>Видео</h2>
+        <div class="video-gallery">
+            <video controls onclick="openVideoModal(this)">
+                <source src="video1.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+            <video controls onclick="openVideoModal(this)">
+                <source src="video2.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+    </section>
+
+</main>
+
+<div id="modal" class="modal" onclick="closeModal()">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<div id="videoModal" class="modal" onclick="closeVideoModal()">
+    <span class="close" onclick="closeVideoModal()">&times;</span>
+    <video class="modal-video" controls id="modalVideo">
+        Ваш браузер не поддерживает это видео.
+    </video>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

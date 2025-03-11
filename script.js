@@ -1,85 +1,54 @@
-function showCategory(folder) {
-    fetchMediaFiles(folder);
-}
+const GITHUB_API_URL = "https://api.github.com/repos/Ro-on/ro-on.github.io/contents/";
 
-function fetchMediaFiles(folder) {
-    const container = document.getElementById('content');
-    container.innerHTML = ''; // Очищаем предыдущий контент
-
-    fetch(`fetchMedia.php?folder=${folder}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(files => {
-            if (files.error) {
-                container.innerHTML = `<p>${files.error}</p>`;
-                return;
-            }
-
-            files.forEach(fileName => {
-                if (folder === 'images') {
-                    const img = document.createElement('img');
-                    img.src = `images/${fileName}`;
-                    img.alt = 'Изображение';
-                    img.onclick = function() {
-                        openModal(img.src, false);
-                    };
-                    container.appendChild(img);
-                } else if (folder === 'videos') {
-                    const videoElement = document.createElement('video');
-                    videoElement.src = `videos/${fileName}`;
-                    videoElement.alt = 'Видео';
-                    videoElement.controls = true; // Добавление управляющих элементов
-                    videoElement.onclick = function() {
-                        openModal(videoElement.src, true);
-                    };
-                    container.appendChild(videoElement);
-                }
-            });
-        })
-        .catch(error => console.error('Ошибка:', error));
-}
-
-function openModal(src, isVideo = false) {
-    const modal = document.getElementById('modal');
-    const modalImage = document.getElementById('modal-image');
-    const modalVideo = document.getElementById('modal-video');
-    const caption = document.getElementById('caption');
-
-    modal.style.display = "flex";
-
-    if (isVideo) {
-        modalVideo.src = src;
-        modalVideo.style.display = "block"; // Показывать видео
-        modalImage.style.display = "none";  // Скрыть изображение
-        modalVideo.play(); // Начать воспроизведение видео
-    } else {
-        modalImage.src = src;
-        modalImage.style.display = "block"; // Показывать изображение
-        modalVideo.style.display = "none";   // Скрыть видео
-    }
+function openModal(img) {
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImage");
+    modal.style.display = "block";
+    modalImg.src = img.src;
 }
 
 function closeModal() {
-    const modal = document.getElementById('modal');
-    const modalVideo = document.getElementById('modal-video');
-
-    modal.style.display = "none";
-    modalVideo.pause(); // Остановить видео
-    modalVideo.src = ''; // Очистить источник видео
-
-    // Также очищаем изображение
-    const modalImage = document.getElementById('modal-image');
-    modalImage.src = ''; // Очистить источник изображения
+    document.getElementById("modal").style.display = "none";
 }
 
-// Закрытие модального окна при клике вне его области
-window.onclick = function(event) {
-    const modal = document.getElementById('modal');
-    if (event.target === modal) {
-        closeModal();
-    }
-};
+function openVideoModal(video) {
+    const videoModal = document.getElementById("videoModal");
+    const modalVideo = document.getElementById("modalVideo");
+    videoModal.style.display = "block";
+    modalVideo.src = video.src;
+}
+
+function closeVideoModal() {
+    document.getElementById("videoModal").style.display = "none";
+    const modalVideo = document.getElementById("modalVideo");
+    modalVideo.src = ""; // Остановить видео
+}
+
+async function loadCategory(category) {
+    const response = await fetch(GITHUB_API_URL + category);
+    const data = await response.json();
+
+    const gallery = document.getElementById("gallery");
+    gallery.innerHTML = ''; // Очистить текущий контент
+
+    data.forEach(item => {
+        if (item.type === 'file') {
+            const filePath = item.download_url;
+
+            if (category === 'images') {
+                const img = document.createElement("img");
+                img.src = filePath;
+                img.alt = "Мем";
+                img.className = "gallery-image";
+                img.onclick = () => openModal(img);
+                gallery.appendChild(img);
+            } else if (category === 'videos') {
+                const video = document.createElement("video");
+                video.controls = true;
+                video.src = filePath;
+                video.onclick = () => openVideoModal(video);
+                gallery.appendChild(video);
+            }
+        }
+    });
+}
